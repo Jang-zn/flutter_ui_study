@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:ui_proto/widget/fancy_button.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -19,22 +22,38 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  final List<UniqueKey> _buttonKeys = [UniqueKey(),UniqueKey()];
+  bool reversed = false;
   int _counter = 0;
 
   void _resetCounter() {
     setState(() {
       _counter=0;
+      reversed=!reversed;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final _increaseButton = FancyButton(onPressed: _increase,
+        child: const Text("Increase",
+            style:TextStyle(color:Colors.white, fontWeight: FontWeight.bold))
+    );
+    final _decreaseButton= FancyButton(onPressed: _decrease,
+        child: const Text("Decrease",
+            style:TextStyle(color:Colors.white, fontWeight: FontWeight.bold))
+    );
+
+    List<Widget> _buttons = <Widget>[_increaseButton, _decreaseButton];
+    if(reversed){
+      _buttons = _buttons.reversed.toList();
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -45,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Container(child:
               Image.network("https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1",),
-              margin: EdgeInsets.all(20),
+              margin: const EdgeInsets.all(40),
             ),
             const Text(
               'You have pushed the button this many times:',
@@ -57,12 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ElevatedButton(onPressed: _increase, 
-                    child: Text("Increase")
-                ),
-                ElevatedButton(onPressed: _Decrease, 
-                    child: Text("Decrease")
-                )
+                _buttons[0],
+                _buttons[1]
               ],
             )
           ],
@@ -82,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _Decrease(){
+  void _decrease(){
     setState(() {
       if(_counter>0) {
         _counter--;
