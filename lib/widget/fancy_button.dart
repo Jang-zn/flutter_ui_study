@@ -15,10 +15,10 @@ class _FancyButtonState extends State<FancyButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color:_getColors(),
       child:ElevatedButton(
         child : widget.child,
         onPressed: widget.onPressed,
+        style: ElevatedButton.styleFrom(primary: _getColors()),
       )
     );
   }
