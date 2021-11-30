@@ -42,13 +42,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final _increaseButton = FancyButton(onPressed: _increase,
+        key:_buttonKeys.first,
         child: Text("Increase",
-            key:_buttonKeys.first,
             style:const TextStyle(color:Colors.white, fontWeight: FontWeight.bold))
     );
     final _decreaseButton= FancyButton(onPressed: _decrease,
+        key:_buttonKeys.last,
         child: Text("Decrease",
-            key:_buttonKeys.last,
             style:const TextStyle(color:Colors.white, fontWeight: FontWeight.bold))
     );
 
