@@ -14,12 +14,10 @@ class FancyButton extends StatefulWidget {
 class _FancyButtonState extends State<FancyButton> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child:ElevatedButton(
-        child : widget.child,
-        onPressed: widget.onPressed,
-        style: ElevatedButton.styleFrom(primary: _getColors()),
-      )
+    return ElevatedButton(
+      child : widget.child,
+      onPressed: widget.onPressed,
+      style: ElevatedButton.styleFrom(primary: _getColors()),
     );
   }
   Color _getColors(){
